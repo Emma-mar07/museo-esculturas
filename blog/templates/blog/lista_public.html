@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title>Blog</title>
+    <style> 
+        .filtro-usuarios {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f0f0f0;
+        }
+        .usuario-filtro {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px 10px;
+            background: #e0e0e0;
+            border-radius: 3px;
+        }
+        .usuario-filtro.activo {
+            background: #d097ff;
+            color: white;
+        }
+        .limpiar-filtro {
+            display: inline-block;
+            margin-left: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div style="background: rgba(224, 144, 255, 0.959);">
+        <h1>Blog</h1>
+    </div>
+    <!-- Filtro por usuario usando enlaces -->
+    <div class="filtro-usuarios">
+    <strong>Filtrar por autor:</strong>
+   
+    <!-- Opción "Todos", href=? ningun usuario cargado, sino hay activo un usuario se activa el "Todos" -->
+    <a href="?" class="usuario-filtro {% if not usuario_activo %}activo{% endif %}">
+        Todos
+    </a>
+   
+    <!-- Opciones por usuario, recorro los usuarios en usuarios, busco el id del usuario y activo el color -->
+    {% for usuario in usuarios %}
+        <a href="?usuario={{ usuario.id }}" #hipervinculo que le pide el usuario
+           class="usuario-filtro {% if usuario_activo == usuario.id %}activo{% endif %}">
+            {{ usuario.username }}
+        </a>
+    {% endfor %}
+   </div>
+
+   <!-- Lista de publicaciones, en for {%, para mostrar una variable {{ -->
+
+   <div>
+    {% for publicacion in publicaciones %}
+    <p>Publicado: {{ publicacion.fecha_publicacion }} por autor/a: {{ publicacion.autor.username }} </p>
+    <h2> <a href=""> {{publicacion.titulo}} </a> </h2>
+    <p> {{ publicacion.texto|linebreaksbr }} </p>
+    <hr>    
+    {% endfor %}
+   </div>
+</body>
+</html>
