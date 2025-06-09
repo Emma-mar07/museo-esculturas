@@ -1,13 +1,13 @@
-from django.conf import settings
 from django.db import models
+
+# Create your models here.
 from django.utils import timezone
 
 class ObraDeArte(models.Model):
-    autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=200)
+    artista = models.CharField(max_length=100)
+    fecha_creacion = models.DateField()
     descripcion = models.TextField()
-    tecnica = models.CharField(max_length=100)
-    fecha_creacion = models.DateTimeField(default=timezone.now)
     fecha_publicacion = models.DateTimeField(blank=True, null=True)
 
     def publicar(self):

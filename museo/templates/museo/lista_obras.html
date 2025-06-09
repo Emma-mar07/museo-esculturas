@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Obras de Arte</title>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+</head>
+<body>
+    <h1>Galería de Obras de Arte</h1>
+    {% for obra in obras %}
+        <div class="obra">
+            <h2>{{ obra.titulo }}</h2>
+            <p><strong>Artista:</strong> {{ obra.artista }}</p>
+            <p><strong>Creada en:</strong> {{ obra.fecha_creacion }}</p>
+            <p>{{ obra.descripcion|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>
