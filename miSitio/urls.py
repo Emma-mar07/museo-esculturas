@@ -18,6 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('arte.urls')),  # ✔ redirige a las URLs de arte
+    path('', include('arte.urls')),  
 ]
 
