@@ -1,43 +1,25 @@
+{% load static %}
 <html>
 <head>
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <title>Blog</title>
-    <style> 
-        .filtro-usuarios {
-            margin: 15px 0;
-            padding: 10px;
-            background: #f0f0f0;
-        }
-        .usuario-filtro {
-            display: inline-block;
-            margin-right: 10px;
-            padding: 5px 10px;
-            background: #e0e0e0;
-            border-radius: 3px;
-        }
-        .usuario-filtro.activo {
-            background: #d097ff;
-            color: white;
-        }
-        .limpiar-filtro {
-            display: inline-block;
-            margin-left: 10px;
-            color: #666;
-        }
-    </style>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
 <body>
-    <div style="background: rgba(224, 144, 255, 0.959);">
+    <div style="background: rgba(14, 85, 41, 0.959);">
         <h1>Blog</h1>
     </div>
     <!-- Filtro por usuario usando enlaces -->
     <div class="filtro-usuarios">
     <strong>Filtrar por autor:</strong>
-   
+   0
     <!-- Opción "Todos", href=? ningun usuario cargado, sino hay activo un usuario se activa el "Todos" -->
     <a href="?" class="usuario-filtro {% if not usuario_activo %}activo{% endif %}">
         Todos
     </a>
-   
+   ¿
     <!-- Opciones por usuario, recorro los usuarios en usuarios, busco el id del usuario y activo el color -->
     {% for usuario in usuarios %}
         <a href="?usuario={{ usuario.id }}" #hipervinculo que le pide el usuario
