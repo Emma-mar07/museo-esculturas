@@ -1,99 +1,110 @@
-
-<!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cultura Italiana</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body { font-family: 'Segoe UI', sans-serif; color: #333; }
-    header {
-      position: relative; height: 60vh; color: white;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center;
-    }
-    header video {
-      position: absolute; top: 0; left: 0; object-fit: cover;
-      width: 100%; height: 100%; z-index: -1; filter: brightness(0.4);
-    }
-    .img-link img {
-      max-width: 100%; border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-    .img-link img:hover { transform: scale(1.03); }
-    .section-detail { padding-top: 60px; margin-top: -60px; }
-    footer {
-      background: #222; color: white;
-      padding: 20px 0; text-align: center;
-    }
-  </style>
+    <title>Galería de Esculturas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .galeria {
+            background-color: #7D8769;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .galeria-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .galeria-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .obra {
+            position: relative;
+            width: 30%;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .obra img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .obra:hover img {
+            transform: scale(1.05);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            background: #cbd0afbb;
+            color: #000000;
+            width: 100%;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 14px;
+        }
+
+        .obra:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay h2 {
+            margin: 0 0 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .overlay p {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <video autoplay muted loop>
-      <source src="video/fondo.mp4" type="video/mp4">
-    </video>
-    <div class="header-content">
-      <h1>Cultura Italiana</h1>
-      <p>Descubre las riquezas culturales de Italia</p>
+    <!-- Sección Blog -->
+    <h1>Blog de Emma</h1>
+    {% for publicacion in publicaciones %}
+        <div>
+            <h2>{{ publicacion.titulo }}</h2>
+            <p>Publicado: {{ publicacion.fecha_publicacion }}</p>
+            <p>{{ publicacion.texto|linebreaksbr }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+
+    <!-- Sección Galería de Arte -->
+    <div class="galeria">
+        <div class="galeria-title">Galería de Arte</div>
+        <div class="galeria-grid">
+            {% for obra in obras %}
+                <div class="obra">
+                    {% if obra.imagen %}
+                        <img src="{{ obra.imagen.url }}" alt="{{ obra.titulo }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x200.png?text=Sin+imagen" alt="Sin imagen">
+                    {% endif %}
+                    <div class="overlay">
+                        <h2>{{ obra.titulo }}</h2>
+                        <p>Autor: {{ obra.autor }}</p>
+                        <p>{{ obra.descripcion }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-  </header>
-
-  <main class="container text-center my-5">
-    <div class="row g-4">
-      <div class="col-md-4">
-        <a href="#gastronomia" class="img-link">
-          <img src="img/lasagna.jpg" alt="Gastronomía" />
-        </a>
-        <h5>Gastronomía</h5>
-      </div>
-      <div class="col-md-4">
-        <a href="#arte" class="img-link">
-          <img src="img/duomo.jpg" alt="Arte y arquitectura" />
-        </a>
-        <h5>Arte y arquitectura</h5>
-      </div>
-      <div class="col-md-4">
-        <a href="#moda" class="img-link">
-          <img src="img/moda.jpg" alt="Moda" />
-        </a>
-        <h5>Moda</h5>
-      </div>
-      <div class="col-md-4">
-        <a href="#cine" class="img-link">
-          <img src="img/cine.jpg" alt="Cine" />
-        </a>
-        <h5>Cine</h5>
-      </div>
-      <div class="col-md-4">
-        <a href="#religion" class="img-link">
-          <img src="img/religion.jpg" alt="Religión" />
-        </a>
-        <h5>Religión</h5>
-      </div>
-      <div class="col-md-4">
-        <a href="#patrimonio" class="img-link">
-          <img src="img/coliseo.jpg" alt="Patrimonio" />
-        </a>
-        <h5>Patrimonio</h5>
-      </div>
-    </div>
-  </main>
-
-  <div class="container">
-    <section id="gastronomia" class="section-detail"><h3>Gastronomía</h3><p>La cocina italiana es famosa por su variedad y calidad.</p></section>
-    <section id="arte" class="section-detail"><h3>Arte y arquitectura</h3><p>Italia es la cuna del Renacimiento y hogar de grandes artistas.</p></section>
-    <section id="moda" class="section-detail"><h3>Moda</h3><p>Milán es una de las capitales mundiales de la moda.</p></section>
-    <section id="cine" class="section-detail"><h3>Cine</h3><p>El cine italiano ha dejado huella con el neorrealismo y Fellini.</p></section>
-    <section id="religion" class="section-detail"><h3>Religión</h3><p>El catolicismo tiene una profunda influencia en Italia.</p></section>
-    <section id="patrimonio" class="section-detail"><h3>Patrimonio histórico</h3><p>Italia posee más sitios UNESCO que cualquier otro país.</p></section>
-  </div>
-
-  <footer>
-    <p>© 2025 Cultura Italiana. Todos los derechos reservados.</p>
-  </footer>
 
 </body>
 </html>

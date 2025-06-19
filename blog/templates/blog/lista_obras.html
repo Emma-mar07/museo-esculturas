@@ -1,0 +1,83 @@
+<html>
+<head>
+    <title>Galería de Arte</title>
+    <style>
+        body {
+            background-color: #f5f5dc; /* fondo beige */
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .galeria {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .obra {
+            position: relative;
+            width: 30%;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .obra img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .obra:hover img {
+            transform: scale(1.05);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            width: 100%;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 14px;
+        }
+
+        .obra:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay h2 {
+            margin: 0 0 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .overlay p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Galería de Arte</h1>
+    <div class="galeria">
+        {% for obra in obras %}
+            <div class="obra">
+                {% if obra.imagen %}
+                    <img src="{{ obra.imagen.url }}" alt="{{ obra.titulo }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/300x200.png?text=Sin+imagen" alt="Sin imagen">
+                {% endif %}
+                <div class="overlay">
+                    <h2>{{ obra.titulo }}</h2>
+                    <p>Autor: {{ obra.autor }}</p>
+                    <p>{{ obra.descripcion }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
